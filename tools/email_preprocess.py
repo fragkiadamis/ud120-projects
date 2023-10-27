@@ -1,15 +1,13 @@
-#!/usr/bin/python3
+#!/usr/bin/python
 
-import joblib
-import numpy
+import pickle
 
 from sklearn.model_selection import train_test_split
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.feature_selection import SelectPercentile, f_classif
 
-
-def preprocess(words_file = "../tools/word_data.pkl", authors_file="../tools/email_authors.pkl"):
-    """ 
+def preprocess(words_file = "tools/word_data_unix.pkl", authors_file="tools/email_authors.pkl"):
+    """
         this function takes a pre-made list of email texts (by default word_data.pkl)
         and the corresponding authors (by default email_authors.pkl) and performs
         a number of preprocessing steps:
@@ -28,11 +26,12 @@ def preprocess(words_file = "../tools/word_data.pkl", authors_file="../tools/ema
     ### the words (features) and authors (labels), already largely preprocessed
     ### this preprocessing will be repeated in the text learning mini-project
     authors_file_handler = open(authors_file, "rb")
-    authors = joblib.load(authors_file_handler)
-
+    authors = pickle.load(authors_file_handler)
+    authors_file_handler.close()
 
     words_file_handler = open(words_file, "rb")
-    word_data = joblib.load(words_file_handler)
+    word_data = pickle.load(words_file_handler)
+    words_file_handler.close()
 
     ### test_size is the percentage of events assigned to the test set
     ### (remainder go into training)
@@ -46,7 +45,7 @@ def preprocess(words_file = "../tools/word_data.pkl", authors_file="../tools/ema
 
 
 
-    ### feature selection, because text is super high dimensional and 
+    ### feature selection, because text is super high dimensional and
     ### can be really computationally chewy as a result
     selector = SelectPercentile(f_classif, percentile=10)
     selector.fit(features_train_transformed, labels_train)

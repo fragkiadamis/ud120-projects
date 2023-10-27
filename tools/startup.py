@@ -39,7 +39,7 @@ print("Download Complete!")
 
 print("Unzipping Enron dataset (This may take a while)")
 import tarfile
-tfile = tarfile.open("../enron_mail_20150507.tar.gz")
+tfile = tarfile.open("./enron_mail_20150507.tar.gz")
 tfile.extractall(".")
 tfile.close()
 

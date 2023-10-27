@@ -1,5 +1,7 @@
 *.pyc
 enron_mail_20110402.tgz
+enron_mail_20150507.tar.gz
+enron_mail_20150507/
 enron_mail_20110402/
 enron_mail_20150507.tgz
 maildir/
@@ -11,3 +13,4 @@ my_feature_list.pkl
 .DS_Store
 __pycache__
 venv/
+.idea
